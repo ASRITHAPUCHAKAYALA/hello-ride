@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello Ride</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: #f5f6fa;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    /* Header */
+    header {
+      background: #0077b6;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    /* Navigation */
+    nav {
+      background: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    nav button {
+      background: none;
+      border: none;
+      font-size: 14px;
+      color: #777;
+      cursor: pointer;
+    }
+    nav button.active {
+      color: #0077b6;
+      font-weight: bold;
+    }
+
+    /* Sections */
+    .section {
+      flex: 1;
+      overflow-y: auto;
+      display: none;
+      padding: 15px;
+    }
+    .section.active {
+      display: block;
+    }
+
+    /* Home Section */
+    #homeSection {
+      text-align: center;
+      padding: 10px;
+      background-image: url(./images/logo1.img.png);
+    }
+    #homeSection h2 {
+      color: #0077b6;
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+    #homeSection p {
+      font-size: 16px;
+      color:#0077b6;
+      margin-bottom: 20px;
+    }
+    .start-btn {
+      background: #0077b6;
+      padding: 12px 24px;
+      position: relative;
+      top: 300px;
+      right: 25px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      color: white;
+    }
+    .start-btn:hover {
+      background: #0096c7;
+    }
+
+    /* Search Box */
+    .search-box {
+      background: white;
+      margin-bottom: 15px;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .search-box h2 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #0077b6;
+    }
+    .search-input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+    .find-btn {
+      width: 100%;
+      padding: 12px;
+      background: #0077b6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .find-btn:hover {
+      background: #0096c7;
+    }
+
+    /* Ride List */
+    .rides-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 10px 0;
+      color: #023e8a;
+    }
+    .ride-card {
+      background: white;
+      padding: 15px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .ride-card h3 {
+      margin: 0;
+      font-size: 16px;
+      color: #023e8a;
+    }
+    .ride-card p {
+      margin: 3px 0;
+      font-size: 13px;
+      color: #555;
+    }
+    .ride-footer {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .ride-price {
+      font-weight: bold;
+      color: #0077b6;
+      font-size: 16px;
+    }
+    .book-btn {
+      background: #0096c7;
+      color: white;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .book-btn:hover {
+      background: #00b4d8;
+    }
+
+    /* Profile Section */
+    .profile-card {
+      background: lightblue;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 300px;
+      margin: 30px auto;
+    }
+    .profile-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 150px;
+    }
+    .profile-card h3 {
+      margin: 5px 0;
+      color: #023e8a;
+    }
+    .profile-card p {
+      margin: 5px 0;
+      color: #555;
+    }
+
+    /* Footer */
+    footer {
+      background: #0077b6;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Hello Ride</header>
+
+  <!-- Top Nav -->
+  <nav>
+    <button id="homeTab" class="active" onclick="showSection('home')">Home</button>
+    <button id="ridesTab" onclick="showSection('rides')">Rides</button>
+    <button id="mapTab" onclick="showSection('map')">Map</button>
+    <button id="profileTab" onclick="showSection('profile')">Profile</button>
+  </nav>
+
+  <!-- Home Section -->
+  <div id="homeSection" class="section active">
+    <h2>Welcome to Hello Ride 🚖</h2>
+    <p>Your trusted travel companion for safe, affordable, and quick rides.</p>
+    <p>Book rides anytime, anywhere — just a few clicks away!</p>
+    <button class="start-btn" onclick="showSection('rides')">Get Started</button>
+  </div>
+
+  <!-- Rides Section -->
+  <div id="ridesSection" class="section">
+    <div class="search-box">
+      <h2>Where are you going?</h2>
+      <input type="text" id="pickup" class="search-input" placeholder="Enter pickup location">
+      <input type="text" id="destination" class="search-input" placeholder="Enter destination">
+      <button class="find-btn" onclick="findRide()">Find Ride</button>
+    </div>
+
+    <div class="rides-title">Available Rides</div>
+
+    <div class="ride-card">
+      <h3>Vijayawada → Vizag</h3>
+      <p>Today, 5:30 PM</p>
+      <div class="ride-footer">
+        <div class="ride-price">₹350</div>
+        <button class="book-btn" onclick="bookRide('Vijayawada → Vizag')">Book Ride</button>
+      </div>
+    </div>
+
+    <div class="ride-card">
+      <h3>Guntur → Rajahmundry</h3>
+      <p>Tomorrow, 8:00 AM</p>
+      <div class="ride-footer">
+        <div class="ride-price">₹280</div>
+        <button class="book-btn" onclick="bookRide('Guntur → Rajahmundry')">Book Ride</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map Section -->
+  <div id="mapSection" class="section">
+    <h2 style="color:#0077b6;">Open Destination in Google Maps</h2>
+    <p>Click the button below to view your entered destination.</p>
+    <button class="find-btn" onclick="openMap()">Open in Google Maps</button>
+  </div>
+
+  <!-- Profile Section -->
+  <div id="profileSection" class="section">
+    <div class="profile-card" id="profileCard">
+      <!-- Filled dynamically by JS -->
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Hello Ride. All rights reserved.
+  </footer>
+
+  <script>
+    // Tab Switching
+    function showSection(section) {
+      document.getElementById("homeSection").classList.remove("active");
+      document.getElementById("ridesSection").classList.remove("active");
+      document.getElementById("mapSection").classList.remove("active");
+      document.getElementById("profileSection").classList.remove("active");
+
+      document.getElementById("homeTab").classList.remove("active");
+      document.getElementById("ridesTab").classList.remove("active");
+      document.getElementById("mapTab").classList.remove("active");
+      document.getElementById("profileTab").classList.remove("active");
+
+      if (section === "home") {
+        document.getElementById("homeSection").classList.add("active");
+        document.getElementById("homeTab").classList.add("active");
+      } else if (section === "rides") {
+        document.getElementById("ridesSection").classList.add("active");
+        document.getElementById("ridesTab").classList.add("active");
+      } else if (section === "map") {
+        document.getElementById("mapSection").classList.add("active");
+        document.getElementById("mapTab").classList.add("active");
+      } else if (section === "profile") {
+        document.getElementById("profileSection").classList.add("active");
+        document.getElementById("profileTab").classList.add("active");
+      }
+    }
+
+    // Dummy ride search
+    function findRide() {
+      alert("Searching rides for: " + 
+        document.getElementById("pickup").value + " → " + 
+        document.getElementById("destination").value);
+    }
+
+    // Book ride feature
+    function bookRide(route) {
+      alert("Ride booked successfully for " + route + " 🚖");
+    }
+
+    // Open Google Maps
+    function openMap() {
+      const destination = document.getElementById("destination").value;
+      if (destination.trim() === "") {
+        alert("Please enter a destination in the Rides tab first.");
+        return;
+      }
+      const url = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(destination);
+      window.open(url, "_blank");
+    }
+
+    // Dynamic Profile
+    const profileData = {
+      name: "John Doe",
+      email: "johndoe@example.com",
+      phone: "+91 9876543210",
+      photo: "https://via.placeholder.com/100"
+    };
+
+    function loadProfile() {
+      const card = document.getElementById("profileCard");
+      card.innerHTML = `
+        <img src="${profileData.photo}" alt="Profile Photo">
+        <h3>${profileData.name}</h3>
+        <p>Email: ${profileData.email}</p>
+        <p>Phone: ${profileData.phone}</p>
+      `;
+    }
+
+    // Load profile on page start
+    window.onload = loadProfile;
+  </script>
+
+</body>
+</html>
+</body>
+</html>
